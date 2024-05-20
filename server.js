@@ -11,20 +11,52 @@ const mongoUri = 'mongodb://' + config.mongodb.hostname + ':' + config.mongodb.p
 const mongoClient = new MongoClient(mongoUri);
 
 mqttClient.on("connect", () => {
-  mqttClient.subscribe("/login", (err) => {
-    if (!err) {
-      console.log("MQTT Client connected");
-    }
-  });
+  subscribeToTopic("/login");
+  console.log("MQTT Client connected");
 });
-
-mqttClient.on("message", (topic, message) => {
+mqttClient.on("message", async (topic, message) => {
   if (message != null) {
-    message = JSON.parse(message); // Casting to string using String() constructor
+    message = JSON.parse(String(message));
     console.log(message);
-    run(message);
+    switch (topic) {
+      case '/login':
+        await handleLogin(message);
+        break;
+        // Add more cases as needed for other topics
+      default:
+        console.log(`No handler for topic ${topic}`);
+    }
   };
 });
+
+async function handleLogin(message) {
+  try {
+    await mongoClient.connect();
+    const database = mongoClient.db(config.mongodb.database);
+    const users = database.collection("users");
+
+    // Assuming message contains a 'username' property
+    const user = await users.findOne({ username: message.username });
+    if (user) {
+      // User exists, publish user_Id and house_Id
+      mqttClient.publish('/user_data', JSON.stringify({ userId: user._id }));
+    } else {
+      console.log('User does not exist');
+    }
+  } finally {
+    await mongoClient.close();
+  }
+}
+
+function subscribeToTopic(topic) {
+  mqttClient.subscribe(topic, (err) => {
+    if (!err) {
+      console.log(`Subscribed to topic: ${topic}`);
+    } else {
+      console.error(`Failed to subscribe to topic: ${topic}`);
+    }
+  });
+}
 
 
 async function run(msg) {
