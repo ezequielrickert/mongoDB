@@ -15,7 +15,9 @@ class LoginController extends BaseController {
 
             const user = await users.findOne({ username: message.username });
             if (user) {
-                this.publish({ houseId: user.houseId });
+                if (user.password === message.password) {
+                    this.publish({houseId: user.houseId, userId: user._id});
+                }
             } else {
                 console.log('User does not exist');
             }

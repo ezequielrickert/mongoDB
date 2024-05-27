@@ -15,8 +15,9 @@ class RegisterController extends BaseController {
 
             const user = {
                 username: message.username,
+                password: message.password,
                 houseId: message.houseId,
-                role: message.role === 'padre' ? 'admin' : 'notadmin'
+                role: "hijo"
             };
 
             const result = await users.insertOne(user);

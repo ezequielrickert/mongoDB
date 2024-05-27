@@ -12,7 +12,7 @@ const mongoClient = new MongoClient(mongoUri);
 
 // Import controllers
 const LoginController = require('/controller/LoginController');
-const RegisterController = require('controller/RegisterController');
+const RegisterController = require('/controller/RegisterController');
 
 // Create controller instances
 const loginController = new LoginController(mqttClient, mongoClient, config);
