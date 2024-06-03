@@ -11,12 +11,12 @@ const mongoUri = 'mongodb://' + config.mongodb.hostname + ':' + config.mongodb.p
 const mongoClient = new MongoClient(mongoUri);
 
 // Import controllers
-const LoginController = require('/controller/LoginController');
-const RegisterController = require('/controller/RegisterController');
-const ExtractionController = require('/controller/ExtractionController');
-const LimitController = require('/controller/LimitController');
-const HouseController = require('/controller/HouseController');
-const SafeLoginController = require('/controller/SafeLoginController');
+const LoginController = require('./controller/LoginController.js');
+const RegisterController = require('./controller/RegisterController.js');
+const ExtractionController = require('./controller/ExtractionController.js');
+const LimitController = require('./controller/LimitController.js');
+const HouseController = require('./controller/HouseController.js');
+const SafeLoginController = require('./controller/SafeLoginController.js');
 
 // Create controller instances
 const loginController = new LoginController(mqttClient, mongoClient, config);
