@@ -12,11 +12,15 @@ class RegisterController extends BaseController {
             await this.mongoClient.connect();
             const database = this.mongoClient.db(this.config.mongodb.database);
             const users = database.collection("users");
+            const jsonMessage = JSON.parse(JSON.parse(String(message)));
+            console.log(jsonMessage);
+            console.log(jsonMessage.username);
+            console.log(jsonMessage.password);
 
             const user = {
-                username: message.username,
-                password: message.password,
-                houseId: message.houseId,
+                username: jsonMessage.username,
+                password: jsonMessage.password,
+                houseId: jsonMessage.houseId,
                 role: "hijo"
             };
 

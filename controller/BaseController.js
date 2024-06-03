@@ -13,13 +13,13 @@ class BaseController {
 
         this.mqttClient.on('message', (receivedTopic, message) => {
             if (receivedTopic === this.topic) {
-                this.handleMessage(JSON.parse(String(message)));
+                this.handleMessage(message);
             }
         });
     }
 
-    publish(message) {
-        this.mqttClient.publish(this.topic, JSON.stringify(message));
+    publish(topic, message) {
+        this.mqttClient.publish(topic, JSON.stringify(message));
     }
 
     handleMessage(message) {
@@ -28,3 +28,4 @@ class BaseController {
 }
 
 module.exports = BaseController;
+

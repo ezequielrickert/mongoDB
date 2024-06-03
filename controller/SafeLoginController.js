@@ -2,7 +2,7 @@ const BaseController = require('./BaseController');
 
 class LoginController extends BaseController {
     constructor(mqttClient, mongoClient, config) {
-        super(mqttClient, '/login');
+        super(mqttClient, '/safeLogin');
         this.mongoClient = mongoClient;
         this.config = config;
     }
@@ -21,9 +21,12 @@ class LoginController extends BaseController {
             console.log(user);
             if (user) {
                 console.log("comparing passwords!");
-                if (user.password === jsonMessage.password && user.role === 'padre') {
+                if (user.password === jsonMessage.password && jsonMessage.id === user.houseId) {
                     console.log({houseId: user.houseId, userId: user._id});
-                    this.publish("/user_data", {houseId: user.houseId, userId: user._id});
+                    this.publish("/isValid", true);
+                    setTimeout(() => {
+                        this.publish("/isValid", false);
+                    }, 10000);
                 }
             } else {
                 console.log('User does not exist');
