@@ -17,6 +17,7 @@ const ExtractionController = require('./controller/ExtractionController.js');
 const LimitController = require('./controller/LimitController.js');
 const HouseController = require('./controller/HouseController.js');
 const SafeLoginController = require('./controller/SafeLoginController.js');
+const HouseUsersController = require('./controller/HouseUsersController.js');
 
 // Create controller instances
 const loginController = new LoginController(mqttClient, mongoClient, config);
@@ -25,6 +26,7 @@ const extractionController = new ExtractionController(mqttClient, mongoClient, c
 const limitController = new LimitController(mqttClient, mongoClient, config);
 const houseController = new HouseController(mqttClient, mongoClient, config);
 const safeLoginController = new SafeLoginController(mqttClient, mongoClient, config);
+const houseUsersController = new HouseUsersController(mqttClient, mongoClient, config);
 
 // Controllers are now listening for their respective topics
 console.log("Application started");
