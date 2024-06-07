@@ -16,14 +16,14 @@ class HouseUsersController extends BaseController {
 
             const houseId = jsonMessage.houseId;
             const houseUsers = await users.find({ houseId: houseId }).toArray();
-
-            console.log(`Users in house ${houseId}:`, houseUsers);
             if (houseUsers) {
-                console.log(houseUsers);
-                this.publish("/users_list", JSON.stringify(houseUsers));
+                // Create a new array that only contains the id and username of each user
+                const usersInfo = houseUsers.map(user => ({ userId: user._id, username: user.username }));
+                console.log(usersInfo);
+                this.publish("/users_list", JSON.stringify(usersInfo));
             }
             else {
-                console.log("Didnt find any users of the house");
+                console.log("Didn't find any users of the house");
             }
         } finally {
             await this.mongoClient.close();
