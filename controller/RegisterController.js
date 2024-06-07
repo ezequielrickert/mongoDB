@@ -25,6 +25,7 @@ class RegisterController extends BaseController {
             };
 
             const result = await users.insertOne(user);
+            console.log(result);
             if (result.insertedCount > 0) {
                 console.log('User registered successfully');
             } else {
