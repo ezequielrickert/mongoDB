@@ -17,7 +17,7 @@ class LimitController extends BaseController {
             const house = await houses.findOne({ houseId: jsonMessage.houseId });
 
             if (house) {
-                await houses.updateOne({ houseId: jsonMessage.houseId }, { $set: { limit: jsonMessage.amount } });
+                await houses.updateOne({ houseId: jsonMessage.houseId }, { $set: { limit: parseInt(jsonMessage.amount) } });
                 console.log(`The limit of the safebox was set to ${jsonMessage.amount}`);
             } else {
                 console.log('House does not exist');
