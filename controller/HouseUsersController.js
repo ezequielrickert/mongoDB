@@ -18,7 +18,7 @@ class HouseUsersController extends BaseController {
             const houseUsers = await users.find({ houseId: houseId }).toArray();
             if (houseUsers) {
                 // Create a new array that only contains the id and username of each user
-                const usersInfo = houseUsers.map(user => ({ userId: user._id, username: user.username }));
+                const usersInfo = houseUsers.map(user => ({ userId: user._id, username: user.username, isBlocked: user.isBlocked }));
                 console.log(usersInfo);
                 this.publish("/users_list", JSON.stringify(usersInfo));
             }
