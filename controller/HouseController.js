@@ -13,12 +13,12 @@ class HouseController extends BaseController {
             const database = this.mongoClient.db(this.config.mongodb.database);
             const houses = database.collection("houses");
             const jsonMessage = JSON.parse(JSON.parse(String(message)));
-
+            console.log(jsonMessage);
             const house = await houses.findOne({ houseId: jsonMessage.houseId });
 
             if (house) {
-                await houses.updateOne({ houseId: jsonMessage.houseId }, { $inc: { capacity: +jsonMessage.amount } });
-                console.log(`Added ${jsonMessage.amount} to the safebox. New limit is ${house.capacity + jsonMessage.amount}`);
+                await houses.updateOne({ houseId: jsonMessage.houseId }, { $inc: { amount: +jsonMessage.amount } });
+                console.log(`Added ${jsonMessage.amount} to the safebox. New limit is ${house.amount + jsonMessage.amount}`);
             } else {
                 console.log('House does not exist');
             }
