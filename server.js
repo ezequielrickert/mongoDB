@@ -18,6 +18,7 @@ const LimitController = require('./controller/LimitController.js');
 const HouseController = require('./controller/HouseController.js');
 const SafeLoginController = require('./controller/SafeLoginController.js');
 const HouseUsersController = require('./controller/HouseUsersController.js');
+const BlockController = require('./controller/BlockController.js');
 
 // Create controller instances
 const loginController = new LoginController(mqttClient, mongoClient, config);
@@ -27,6 +28,7 @@ const limitController = new LimitController(mqttClient, mongoClient, config);
 const houseController = new HouseController(mqttClient, mongoClient, config);
 const safeLoginController = new SafeLoginController(mqttClient, mongoClient, config);
 const houseUsersController = new HouseUsersController(mqttClient, mongoClient, config);
+const blockController = new BlockController(mqttClient, mongoClient, config);
 
 // Controllers are now listening for their respective topics
 console.log("Application started");

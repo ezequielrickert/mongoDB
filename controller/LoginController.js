@@ -23,9 +23,10 @@ class LoginController extends BaseController {
                 console.log("comparing passwords!");
                 if (user.password === jsonMessage.password && user.role === 'padre') {
                     console.log({houseId: user.houseId, userId: user._id});
-                    this.publish("/user_data", {houseId: user.houseId, userId: user._id});
+                    this.publish("/user_data", {houseId: user.houseId, userId: user._id, message: "Welcome"});
                 }
             } else {
+                this.publish("/user_data", {houseId: user.houseId, userId: user._id, message: "Failed to login"})
                 console.log('User does not exist');
             }
         } finally {
