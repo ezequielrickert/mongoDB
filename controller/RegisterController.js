@@ -22,7 +22,7 @@ class RegisterController extends BaseController {
                 password: jsonMessage.password,
                 houseId: jsonMessage.houseId,
                 role: "hijo",
-                blocked: false
+                isBlocked: false
             };
 
             const result = await users.insertOne(user);
