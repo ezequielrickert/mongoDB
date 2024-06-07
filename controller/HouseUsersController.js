@@ -15,7 +15,7 @@ class HouseUsersController extends BaseController {
             const jsonMessage = JSON.parse(JSON.parse(String(message)));
 
             const houseId = jsonMessage.houseId;
-            const houseUsers = await users.find({ houseId: houseId }).toArray();
+            const houseUsers = await users.find({ houseId: String(houseId) }).toArray();
             if (houseUsers) {
                 // Create a new array that only contains the id and username of each user
                 const usersInfo = houseUsers.map(user => ({ userId: user._id, username: user.username, isBlocked: user.isBlocked }));
