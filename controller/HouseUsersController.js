@@ -12,7 +12,7 @@ class HouseUsersController extends BaseController {
             await this.mongoClient.connect();
             const database = this.mongoClient.db(this.config.mongodb.database);
             const users = database.collection("users");
-            const jsonMessage = JSON.parse(JSON.parse(String(message)));
+            const jsonMessage = JSON.parse(String(message));
 
             const houseId = jsonMessage.houseId;
             const houseUsers = await users.find({ houseId: String(houseId) }).toArray();
