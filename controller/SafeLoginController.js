@@ -12,7 +12,7 @@ class SafeLoginController extends BaseController {
             await this.mongoClient.connect();
             const database = this.mongoClient.db(this.config.mongodb.database);
             const users = database.collection("users");
-            const jsonMessage = JSON.parse(String(message));
+            const jsonMessage = JSON.parse(JSON.parse(String(message)));
             console.log(jsonMessage);
             console.log(jsonMessage.username);
             console.log(jsonMessage.password);
