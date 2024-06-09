@@ -40,5 +40,3 @@ class SafeLoginController extends BaseController {
 }
 
 module.exports = SafeLoginController;
-
-
