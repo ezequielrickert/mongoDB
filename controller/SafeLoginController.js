@@ -23,9 +23,9 @@ class LoginController extends BaseController {
                 console.log("comparing passwords!");
                 if (user.password === jsonMessage.password && jsonMessage.id === user.houseId) {
                     console.log({houseId: user.houseId, userId: user._id});
-                    this.publish("/isValid", true);
+                    this.publish("/isValid", {isValid: true});
                     setTimeout(() => {
-                        this.publish("/isValid", false);
+                        this.publish("/isValid", {isValid: false});
                     }, 10000);
                 }
             } else {
