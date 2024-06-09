@@ -28,8 +28,7 @@ class ExtractionController extends BaseController {
                         const amount = Number(jsonMessage.amount);
                         if (extractionLimit >= jsonMessage.amount) {
                             await houses.updateOne({houseId: jsonMessage.houseId}, {$inc: {amount: -amount}});
-                            console.log(`Extracted ${jsonMessage.amount} from the safebox. New limit is ${house.amount - jsonMessage.amount}`);
-                            this.publish("/extraction_confirmation", {message: "Extraction completed"});
+                            console.log(`Extracted ${jsonMessage.amount} from the safebox. New limit is ${Number(house.amount) - Number(jsonMessage.amount)}`);                            this.publish("/extraction_confirmation", {message: "Extraction completed"});
                         } else {
                             console.log('You are over the extraction limit');
                             this.publish("/extraction_confirmation", {message: "You are over the extraction limit"});
