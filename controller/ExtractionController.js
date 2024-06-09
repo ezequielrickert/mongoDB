@@ -1,4 +1,5 @@
 const BaseController = require('./BaseController');
+const { ObjectId } = require('mongodb');
 
 class ExtractionController extends BaseController {
     constructor(mqttClient, mongoClient, config) {
@@ -18,7 +19,7 @@ class ExtractionController extends BaseController {
 
             const house = await houses.findOne({ houseId: jsonMessage.houseId });
 
-            const user = await users.findOne({ _id: String(jsonMessage.userId)});
+            const user = await users.findOne({ _id: ObjectId(jsonMessage.userId)});
 
             if (house) {
                 const extractionLimit = house.limit === 0 ? house.amount : house.limit;
