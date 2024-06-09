@@ -8,6 +8,8 @@ class BlockController extends BaseController {
     }
 
     async handleMessage(message) {
+        console.log("I'm frikin frakin block controller");
+        console.log("message recibido es: " + message);
         await this.mongoClient.connect();
         const database = this.mongoClient.db(this.config.mongodb.database);
         const users = database.collection("users");

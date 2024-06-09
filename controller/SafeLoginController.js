@@ -26,9 +26,6 @@ class SafeLoginController extends BaseController {
                 if (user.password === String(jsonMessage.password) && String(jsonMessage.id) === user.houseId) {
                     console.log({houseId: user.houseId, userId: user._id});
                     this.publish("/isValid", {isValid: true});
-                    setTimeout(() => {
-                        this.publish("/isValid", {isValid: false});
-                    }, 10000);
                 }
             } else {
                 console.log('User does not exist');

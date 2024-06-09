@@ -47,6 +47,7 @@ class ExtractionController extends BaseController {
                 this.publish("/extraction_confirmation", {message: "House does not exist"});
             }
         } finally {
+            this.publish("/isValid", {isValid: false});
             await this.mongoClient.close();
         }
     }
