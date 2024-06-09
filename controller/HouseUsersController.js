@@ -8,13 +8,20 @@ class HouseUsersController extends BaseController {
     }
 
     async handleMessage(message) {
+        console.log("Received a message: " + message);
         try {
+            console.log("Trying oh yeah");
             await this.mongoClient.connect();
             const database = this.mongoClient.db(this.config.mongodb.database);
             const users = database.collection("users");
             const jsonMessage = JSON.parse(String(message));
 
+            console.log("This is a jsonMessage, sape: " + jsonMessage);
+
             const houseId = jsonMessage.houseId;
+
+            console.log("houseId: " + houseId);
+
             const houseUsers = await users.find({ houseId: String(houseId) }).toArray();
             if (houseUsers) {
                 // Create a new array that only contains the id and username of each user

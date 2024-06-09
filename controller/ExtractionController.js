@@ -13,15 +13,14 @@ class ExtractionController extends BaseController {
             const database = this.mongoClient.db(this.config.mongodb.database);
             const houses = database.collection("houses");
             const users = database.collection("users");
-            const jsonMessage = JSON.parse(String(message));
+            const jsonMessage = JSON.parse(message);
 
             const house = await houses.findOne({ houseId: jsonMessage.houseId });
 
             const user = await users.findOne({ _id: jsonMessage.userId});
 
-            const extractionLimit = house.limit === 0 ? house.amount : house.limit;
-
             if (house) {
+                const extractionLimit = house.limit === 0 ? house.amount : house.limit;
                 if (user) {
                     if (!user.isBlocked) {
                         const amount = Number(jsonMessage.amount);
