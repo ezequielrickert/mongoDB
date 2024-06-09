@@ -18,7 +18,7 @@ class HouseController extends BaseController {
 
             if (house) {
                 await houses.updateOne({ houseId: jsonMessage.houseId }, { $inc: { amount: +jsonMessage.amount } });
-                console.log(`Added ${jsonMessage.amount} to the safebox. New limit is ${house.amount + jsonMessage.amount}`);
+                console.log(`Added ${jsonMessage.amount} to the safebox. New limit is ${Number(house.amount) + Number(jsonMessage.amount)}`);
             } else {
                 console.log('House does not exist');
             }
