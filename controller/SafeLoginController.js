@@ -1,6 +1,6 @@
 const BaseController = require('./BaseController');
 
-class LoginController extends BaseController {
+class SafeLoginController extends BaseController {
     constructor(mqttClient, mongoClient, config) {
         super(mqttClient, '/safeLogin');
         this.mongoClient = mongoClient;
@@ -37,6 +37,6 @@ class LoginController extends BaseController {
     }
 }
 
-module.exports = LoginController;
+module.exports = SafeLoginController;
 
 
