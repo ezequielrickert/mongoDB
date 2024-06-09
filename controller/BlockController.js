@@ -1,4 +1,5 @@
 const BaseController = require('./BaseController');
+const { ObjectId } = require('mongodb');
 
 class BlockController extends BaseController {
     constructor(mqttClient, mongoClient, config) {
@@ -21,7 +22,7 @@ class BlockController extends BaseController {
             for (const user of jsonMessage) {
                 console.log(user);
                 await users.updateOne(
-                    { _id: user.userId }, // Filter
+                    { _id: new ObjectId(user.userId) }, // Filter
                     { $set: { isBlocked: user.isBlocked } } // Update
                 );
             }
