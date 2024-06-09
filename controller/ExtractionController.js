@@ -40,7 +40,7 @@ class ExtractionController extends BaseController {
                 }
                 else {
                     console.log("User not found");
-                    this.publish(("/extraction_confirmation", {message: "User not found"}));
+                    this.publish("/extraction_confirmation", {message: "User not found"});
                 }
             } else {
                 console.log("House does not exist");
