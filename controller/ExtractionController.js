@@ -14,10 +14,11 @@ class ExtractionController extends BaseController {
             const houses = database.collection("houses");
             const users = database.collection("users");
             const jsonMessage = JSON.parse(message);
+            console.log(jsonMessage);
 
             const house = await houses.findOne({ houseId: jsonMessage.houseId });
 
-            const user = await users.findOne({ _id: jsonMessage.userId});
+            const user = await users.findOne({ _id: String(jsonMessage.userId)});
 
             if (house) {
                 const extractionLimit = house.limit === 0 ? house.amount : house.limit;
