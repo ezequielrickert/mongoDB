@@ -23,7 +23,7 @@ class SafeLoginController extends BaseController {
             console.log(user);
             if (user) {
                 console.log("comparing passwords!");
-                if (user.password === jsonMessage.password && jsonMessage.id === user.houseId) {
+                if (user.password === String(jsonMessage.password) && String(jsonMessage.id) === user.houseId) {
                     console.log({houseId: user.houseId, userId: user._id});
                     this.publish("/isValid", {isValid: true});
                     setTimeout(() => {
